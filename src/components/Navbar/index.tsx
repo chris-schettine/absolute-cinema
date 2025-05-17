@@ -1,22 +1,26 @@
-'use client';
-import { BrowserRouter, Link, useNavigate } from "react-router-dom";
+import Link from 'next/link';
 
 import './index.scss';
 
-export default function Navbar() {
+export const Header: React.FC = () => {
     return(
-        <BrowserRouter>
-        <nav className="navbar">
-            <h1 className="page-title">Filmes</h1>
-        <h2>
-            <Link to="/">
-                Filmes
-            </Link>
-            <Link to="@/Statistics">
-                Estatísticas
-            </Link>
-        </h2>
-        </nav>
-        </BrowserRouter>
-  );
+        <header className="navbar bg-base-100">
+            <div className="navbar-start px-3">
+                <Link href="/">
+                    LOGO
+                </Link>
+            </div>
+
+            <div className="navbar-end">
+                <div className='px-3'>
+                    <Link href="/">
+                        Home
+                    </Link>
+                    <Link href="/statistics">
+                        Estatísticas
+                    </Link>
+                </div>
+            </div>
+        </header>
+    )
 }
