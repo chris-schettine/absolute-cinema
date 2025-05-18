@@ -2,8 +2,14 @@
 
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Space_Mono } from 'next/font/google';
 
 import './index.scss'
+
+const spaceMono = Space_Mono ({
+    subsets: ['latin'],
+    weight: ['400'],
+})
 
 interface Movie {
     id: number;
@@ -149,38 +155,43 @@ export default function MovieStatsAdvanced() {
     };
 
     return (
-        <div>
+        <div className={spaceMono.className}>
             <h1>Estatísticas Avançadas dos Filmes</h1>
             {stats ? (
                 <div>
-                    <h2>1. Média de Nota por Gênero</h2>
-                    <ul>
-                        {stats.averageRatingByGenre.map((item) => (
-                            <li key={item.genre}>{item.genre}: {item.average}</li>
-                        ))}
-                    </ul>
-
-                    <h2>2. Quantidade de Filmes por Gênero (Top 250)</h2>
-                    <ul>
-                        {Object.entries(stats.countByGenre).map(([genre, count]) => (
-                            <li key={genre}>{genre}: {count} filmes</li>
-                        ))}
-                    </ul>
-
-                    <h2>3. Quantidade de Filmes por Ano (Top 250)</h2>
-                    <ul>
-                        {stats.sortedCountByYear.map(([year, count]) => (
-                            <li key={year}>{year}: {count} filmes</li>
-                        ))}
-                    </ul>
-
-                    <h2>4. Filmes do Top 250 que estão no Trending Semanal</h2>
-                    <p>Total: {stats.trendingInTopRated.length}</p>
-                    <ul>
-                        {stats.trendingInTopRated.map((movie: Movie) => (
-                            <li key={movie.id}>{movie.title}</li>
-                        ))}
-                    </ul>
+                    <div className='resultsList'>
+                        <h2>1. Média de Nota por Gênero</h2>
+                        <ul>
+                            {stats.averageRatingByGenre.map((item) => (
+                                <li key={item.genre}>{item.genre}: {item.average}</li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div className='resultsList'>
+                        <h2>2. Quantidade de Filmes por Gênero (Top 250)</h2>
+                        <ul>
+                            {Object.entries(stats.countByGenre).map(([genre, count]) => (
+                                <li key={genre}>{genre}: {count} filmes</li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div className='resultsList'>
+                        <h2>3. Quantidade de Filmes por Ano (Top 250)</h2>
+                        <ul>
+                            {stats.sortedCountByYear.map(([year, count]) => (
+                                <li key={year}>{year}: {count} filmes</li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div className='resultsList'>
+                        <h2>4. Filmes do Top 250 que estão no Trending Semanal</h2>
+                        <p>Total: {stats.trendingInTopRated.length}</p>
+                        <ul>
+                            {stats.trendingInTopRated.map((movie: Movie) => (
+                                <li key={movie.id}>{movie.title}</li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
             ) : (
                 <p>Calculando estatísticas...</p>
