@@ -22,17 +22,17 @@ li {
 
   @media (min-width: 768px) {
     flex-direction: row;
-    justify-content: space-between;
     align-items: flex-start;
   }
 
   .text-content {
     flex: 1;
+    min-width: 200px;
     padding-right: 1rem;
   }
 
   .chart-content {
-    flex: 1.5;
+    flex: 2;
     min-width: 300px;
   }
 

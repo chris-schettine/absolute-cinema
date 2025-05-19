@@ -13,26 +13,23 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
 
-.nav-links {
+  .nav-links {
     display: flex;
     gap: 32px;
     list-style: none;
-}
+  }
 
-.nav-links a {
+  a {
     font-size: 18px;
     color: #fff;
     padding-block: 16px;
-}
 
-.nav-links a {
-  text-decoration: none;
-  color: white;
-  font-weight: 400;
-  font-size: 16px;
-  transition: color 0.2s ease-in-out;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 16px;
+    transition: color 0.2s ease-in-out;
+  }
 }
 
 .nav-links a:hover {
