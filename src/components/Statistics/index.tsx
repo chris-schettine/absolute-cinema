@@ -3,6 +3,12 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Jost } from 'next/font/google';
+import { Stats as ImportedStats } from '@/types/stats';
+
+import {
+  BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid,
+  LineChart, Line, PieChart, Pie, Cell, Legend, ResponsiveContainer
+} from 'recharts';
 
 import './index.scss'
 
@@ -26,15 +32,24 @@ interface Genre {
     name: string;
 }
 
-interface Stats {
+interface LocalStats {
     averageRatingByGenre: { genre: string; average: number }[];
     countByGenre: { [genre: string]: number };
     sortedCountByYear: [string, number][];
     trendingInTopRated: Movie[];
 }
 
+const defaultStats: LocalStats = {
+  averageRatingByGenre: [],
+  countByGenre: {},
+  sortedCountByYear: [],
+  trendingInTopRated: []
+};
+
+const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff7300', '#ff4d4d', '#00bfff', '#a83279'];
+
 export default function MovieStatsAdvanced() {
-    const [stats, setStats] = useState<Stats | null>(null);
+    const [stats, setStats] = useState<LocalStats>(defaultStats);
 
     useEffect(() => {
         fetchAndProcessMovies();
@@ -156,6 +171,19 @@ export default function MovieStatsAdvanced() {
         return allMovies;
     };
 
+    const countByGenreData = Object.entries(stats.countByGenre).map(
+        ([genre, count]) => ({ genre, count })
+    );
+
+    const sortedCountByYearData = stats.sortedCountByYear.map(
+        ([year, count]) => ({ year, count })
+    );
+
+    const trendingData = stats.trendingInTopRated
+        .slice(0, 20)
+        .map((m) => ({ title: m.title, value: 1 }));
+
+
     return (
         <div className={jost.className}>
             
@@ -169,6 +197,18 @@ export default function MovieStatsAdvanced() {
                                     <li key={item.genre}>{item.genre}: {item.average}</li>
                                 ))}
                             </ul>
+                            {stats && (
+                                <ResponsiveContainer width="100%" height={300}>
+                                    <BarChart data={stats.averageRatingByGenre}>
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <XAxis dataKey="genre" />
+                                        <YAxis />
+                                        <Tooltip />
+                                        <Legend />
+                                        <Bar dataKey="average" fill="#8884d8" />
+                                    </BarChart>
+                                </ResponsiveContainer>
+                            )}
                         </div>
                         <div className='resultsList'>
                             <h2>2. Quantidade de Filmes por Gênero (Top 250)</h2>
@@ -177,6 +217,28 @@ export default function MovieStatsAdvanced() {
                                     <li key={genre}>{genre}: {count} filmes</li>
                                 ))}
                             </ul>
+                            {stats && (
+                                <ResponsiveContainer width="100%" height={300}>
+                                    <PieChart>
+                                        <Pie
+                                            data={countByGenreData}
+                                            dataKey="count"
+                                            nameKey="genre"
+                                            cx="50%"
+                                            cy="50%"
+                                            outerRadius={100}
+                                            fill="#82ca9d"
+                                            label
+                                        >
+                                            {countByGenreData.map((entry, index) => (
+                                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                            ))}
+                                        </Pie>
+                                        <Tooltip />
+                                        <Legend />
+                                    </PieChart>
+                                </ResponsiveContainer>
+                            )}
                         </div>
                         <div className='resultsList'>
                             <h2>3. Quantidade de Filmes por Ano (Top 250)</h2>
@@ -185,6 +247,18 @@ export default function MovieStatsAdvanced() {
                                     <li key={year}>{year}: {count} filmes</li>
                                 ))}
                             </ul>
+                            {stats && (
+                                <ResponsiveContainer width="100%" height={300}>
+                                    <LineChart data={sortedCountByYearData}>
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <XAxis dataKey="year" />
+                                        <YAxis />
+                                        <Tooltip />
+                                        <Legend />
+                                        <Line type="monotone" dataKey="count" stroke="#ff7300" />
+                                    </LineChart>
+                                </ResponsiveContainer>
+                            )}
                         </div>
                         <div className='resultsList'>
                             <h2>4. Filmes do Top 250 que estão no Trending Semanal</h2>
@@ -194,6 +268,16 @@ export default function MovieStatsAdvanced() {
                                     <li key={movie.id}>{movie.title}</li>
                                 ))}
                             </ul>
+                            {stats && (
+                                <ResponsiveContainer width="100%" height={300}>
+                                    <BarChart data={trendingData}>
+                                        <XAxis dataKey="title" hide />
+                                        <YAxis allowDecimals={false} />
+                                        <Tooltip />
+                                        <Bar dataKey="value" fill="#ffc658" />
+                                    </BarChart>
+                                </ResponsiveContainer>
+                            )}
                         </div>
                 </div>
             ) : (
