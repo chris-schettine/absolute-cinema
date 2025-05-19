@@ -3,7 +3,6 @@ import { FaRegStar } from "react-icons/fa";
 import { FaStarHalfAlt } from "react-icons/fa";
 import './index.scss'
 
-
 export interface Props {
     rating: number
 }
@@ -15,7 +14,7 @@ export default function StarRating(props:Props) {
     const emptyStars = [];
     const halfStars = [];
 
-    var rest = numStars;
+    let rest = numStars;
 
     for (let i=0; i<5; i++) {
         if (i<numStars && rest>1) {

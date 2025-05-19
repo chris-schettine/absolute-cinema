@@ -6,12 +6,6 @@ import axios from 'axios';
 import MovieCard from '../MovieCard';
 import Loading from '../Loading'; // <- Certifique-se que o caminho está correto
 import { Movie } from '@/types/movie';
-import { Jost } from 'next/font/google';
-
-const jost = Jost({
-  subsets: ['latin'],
-  weight: ['300', '100'],
-});
 
 export default function MovieList() {
   const [movies, setMovies] = useState<Movie[]>([]);

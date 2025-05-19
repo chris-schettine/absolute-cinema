@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Jost } from 'next/font/google';
-import { Stats as ImportedStats } from '@/types/stats';
 
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid,
@@ -178,10 +177,6 @@ export default function MovieStatsAdvanced() {
     const sortedCountByYearData = stats.sortedCountByYear.map(
         ([year, count]) => ({ year, count })
     );
-
-    const trendingData = stats.trendingInTopRated
-        .slice(0, 20)
-        .map((m) => ({ title: m.title, value: 1 }));
 
     const trendingPieData = [
         { name: 'Entre os Mais Populares', value: stats.trendingInTopRated.length },
