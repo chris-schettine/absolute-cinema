@@ -6,6 +6,8 @@ import { Jost } from 'next/font/google';
 
 import './index.scss'
 
+import Loading from '../Loading';
+
 const jost = Jost ({
     subsets: ['latin'],
     weight: ['300', '100'],
@@ -156,45 +158,46 @@ export default function MovieStatsAdvanced() {
 
     return (
         <div className={jost.className}>
-            <h1>Estatísticas Avançadas dos Filmes</h1>
+            
             {stats ? (
                 <div>
-                    <div className='resultsList'>
-                        <h2>1. Média de Nota por Gênero</h2>
-                        <ul>
-                            {stats.averageRatingByGenre.map((item) => (
-                                <li key={item.genre}>{item.genre}: {item.average}</li>
-                            ))}
-                        </ul>
-                    </div>
-                    <div className='resultsList'>
-                        <h2>2. Quantidade de Filmes por Gênero (Top 250)</h2>
-                        <ul>
-                            {Object.entries(stats.countByGenre).map(([genre, count]) => (
-                                <li key={genre}>{genre}: {count} filmes</li>
-                            ))}
-                        </ul>
-                    </div>
-                    <div className='resultsList'>
-                        <h2>3. Quantidade de Filmes por Ano (Top 250)</h2>
-                        <ul>
-                            {stats.sortedCountByYear.map(([year, count]) => (
-                                <li key={year}>{year}: {count} filmes</li>
-                            ))}
-                        </ul>
-                    </div>
-                    <div className='resultsList'>
-                        <h2>4. Filmes do Top 250 que estão no Trending Semanal</h2>
-                        <p>Total: {stats.trendingInTopRated.length}</p>
-                        <ul>
-                            {stats.trendingInTopRated.map((movie: Movie) => (
-                                <li key={movie.id}>{movie.title}</li>
-                            ))}
-                        </ul>
-                    </div>
+                    <h1 className='page_title'>Estatísticas Para Nerds</h1>
+                        <div className='resultsList'>
+                            <h2>1. Média de Nota por Gênero</h2>
+                            <ul>
+                                {stats.averageRatingByGenre.map((item) => (
+                                    <li key={item.genre}>{item.genre}: {item.average}</li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className='resultsList'>
+                            <h2>2. Quantidade de Filmes por Gênero (Top 250)</h2>
+                            <ul>
+                                {Object.entries(stats.countByGenre).map(([genre, count]) => (
+                                    <li key={genre}>{genre}: {count} filmes</li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className='resultsList'>
+                            <h2>3. Quantidade de Filmes por Ano (Top 250)</h2>
+                            <ul>
+                                {stats.sortedCountByYear.map(([year, count]) => (
+                                    <li key={year}>{year}: {count} filmes</li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className='resultsList'>
+                            <h2>4. Filmes do Top 250 que estão no Trending Semanal</h2>
+                            <p>Total: {stats.trendingInTopRated.length}</p>
+                            <ul>
+                                {stats.trendingInTopRated.map((movie: Movie) => (
+                                    <li key={movie.id}>{movie.title}</li>
+                                ))}
+                            </ul>
+                        </div>
                 </div>
             ) : (
-                <p>Calculando estatísticas...</p>
+                <Loading />
             )}
         </div>
     );
