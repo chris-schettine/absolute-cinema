@@ -15,8 +15,31 @@ li {
   color: aliceblue;
 }
 .resultsList {
-  padding: 0px 50px 20px;
-  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 3rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .text-content {
+    flex: 1;
+    padding-right: 1rem;
+  }
+
+  .chart-content {
+    flex: 1.5;
+    min-width: 300px;
+  }
+
+  ul {
+    margin-top: 0.5rem;
+    padding-left: 1.5rem;
+  }
 }
 .page_title {
   padding: 24px;
