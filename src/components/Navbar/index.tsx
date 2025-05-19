@@ -1,24 +1,33 @@
 import Link from 'next/link';
 
 import './index.scss';
+import { Jost } from 'next/font/google';
+
+const jost = Jost ({
+    subsets: ['latin'],
+    weight: ['500'],
+    variable: '--font-jost',
+})
 
 export const Header: React.FC = () => {
     return(
-        <header className="navbar bg-base-100">
-            <div className="navbar-start px-3">
-                <Link href="/">
-                    LOGO
-                </Link>
-            </div>
-
-            <div className="navbar-end">
-                <div className='px-3'>
+        <header className="header">
+            <div className="navbar">
+                <div className="logo">
                     <Link href="/">
-                        Home
+                        <img src="/logo.png" className='logo_navbar' alt="Absolute Cinema"></img>
                     </Link>
-                    <Link href="/statistics">
-                        Estatísticas
-                    </Link>
+                </div>
+            
+                <div className={jost.className}>
+                    <nav className="nav-links">
+                        <Link href="/">
+                            Home
+                        </Link>
+                        <Link href="/statistics">
+                            Estatísticas
+                        </Link>
+                    </nav>
                 </div>
             </div>
         </header>

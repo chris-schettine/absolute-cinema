@@ -2,6 +2,13 @@ import { Movie } from "@/types/movie";
 import StarRating from "../StarRating";
 import './index.scss'
 
+import { Jost } from 'next/font/google';
+
+const jost = Jost ({
+    subsets: ['latin'],
+    weight: ['300', '100'],
+})
+
 export interface Props {
     movie: Movie
 }
@@ -9,7 +16,7 @@ export interface Props {
 export default function MovieCard(props: Props) {
     const movie = props.movie;
     return(
-        <li className='movie-card'>
+        <li className={`${jost.className} movie-card`}>
             <div className="movie-poster">
             <img 
                 src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}

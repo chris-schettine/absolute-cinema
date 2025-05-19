@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Space_Mono } from 'next/font/google';
+import { Jost } from 'next/font/google';
 
 import './index.scss'
 
-const spaceMono = Space_Mono ({
+const jost = Jost ({
     subsets: ['latin'],
-    weight: ['400'],
+    weight: ['300', '100'],
 })
 
 interface Movie {
@@ -155,7 +155,7 @@ export default function MovieStatsAdvanced() {
     };
 
     return (
-        <div className={spaceMono.className}>
+        <div className={jost.className}>
             <h1>Estatísticas Avançadas dos Filmes</h1>
             {stats ? (
                 <div>
