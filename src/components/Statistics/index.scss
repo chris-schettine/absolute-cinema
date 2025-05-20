@@ -16,29 +16,28 @@ li {
 }
 .resultsList {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  flex-direction: column-reverse;
+  gap: 10px;
   margin-bottom: 3rem;
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-    align-items: flex-start;
-  }
+  align-items:center;
 
   .text-content {
-    flex: 1;
+    width: 100%;
     min-width: 200px;
     padding-right: 1rem;
+    text-align: center;
   }
 
   .chart-content {
-    flex: 2;
+    width: 100%;
+    max-width: 600px;
     min-width: 300px;
   }
 
   ul {
     margin-top: 0.5rem;
     padding-left: 1.5rem;
+    list-style: none;
   }
 }
 .page_title {

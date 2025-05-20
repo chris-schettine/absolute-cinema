@@ -6,7 +6,8 @@ import { Jost } from 'next/font/google';
 
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid,
-  LineChart, Line, PieChart, Pie, Cell, Legend, ResponsiveContainer
+  LineChart, Line, PieChart, Pie, Cell, Legend, ResponsiveContainer,
+  LabelList
 } from 'recharts';
 
 import './index.scss'
@@ -189,129 +190,149 @@ export default function MovieStatsAdvanced() {
             {stats ? (
                 <div>
                     <h1 className='page_title'>Estatísticas Para Nerds</h1>
-                        <div className='resultsList'>
-                            <div className='text-content'>
-                                <h2>1. Média de Nota por Gênero</h2>
-                                <ul>
-                                    {stats.averageRatingByGenre.map((item) => (
-                                        <li key={item.genre}>{item.genre}: {item.average}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                            <div className='chart-content'>
-                                {stats && (
-                                    <ResponsiveContainer width="100%" height={300}>
-                                        <BarChart data={stats.averageRatingByGenre}>
-                                            <CartesianGrid strokeDasharray="3 3" />
-                                            <XAxis dataKey="genre" angle={-45} textAnchor="end" interval={0}/>
-                                            <YAxis
-                                            domain={[
-                                                (dataMin: number) => Math.max(0, Math.floor(dataMin - 0.5)),
-                                                (dataMax: number) => Math.ceil(dataMax + 0.5),
-                                            ]}
-                                            />
-                                            <Tooltip />
-                                            <Legend wrapperStyle={{ marginTop: 20 }} />
-                                            <Bar dataKey="average" fill="#8884d8" name="Média das Avaliações" />
-                                        </BarChart>
-                                    </ResponsiveContainer>
-                                )}
+                        <div className='resultsList_container'>
+                            <h2>1. Média de Nota por Gênero</h2>
+                            <div className='resultsList'>
+                                <div className='text-content'>
+                                    <ul>
+                                        {stats.averageRatingByGenre.map((item) => (
+                                            <li key={item.genre}>{item.genre}: {item.average}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <div className='chart-content'>
+                                    {stats && (
+                                        <ResponsiveContainer width="100%" height={300}>
+                                            <BarChart data={stats.averageRatingByGenre}>
+                                                <CartesianGrid strokeDasharray="3 3" />
+                                                <XAxis dataKey=" " angle={-45} textAnchor="end" interval={0}/>
+                                                <YAxis
+                                                domain={[
+                                                    (dataMin: number) => Math.max(0, Math.floor(dataMin - 0.5)),
+                                                    (dataMax: number) => Math.ceil(dataMax + 0.5),
+                                                ]}
+                                                />
+                                                <Tooltip />
+                                                <Legend wrapperStyle={{ marginTop: 20 }} />
+                                                <Bar
+                                                    dataKey="average"
+                                                    fill="#8884d8"
+                                                    name="Média das Avaliações"
+                                                >
+                                                    <LabelList
+                                                        dataKey="genre"
+                                                        position="insideBottom"
+                                                        angle={270}
+                                                        offset={25}
+                                                        fill="black"
+                                                    />
+                                                </Bar>
+                                            </BarChart>
+                                        </ResponsiveContainer>
+                                    )}
+                                </div>
                             </div>
                         </div>
-                        <div className='resultsList'>
-                            <div className='text-content'>
-                                <h2>2. Quantidade de Filmes por Gênero (Top 250)</h2>
-                                <ul>
-                                    {Object.entries(stats.countByGenre).map(([genre, count]) => (
-                                        <li key={genre}>{genre}: {count} filmes</li>
-                                    ))}
-                                </ul>
+                        <div className='resultsList_container'>
+                            <h2>2. Quantidade de Filmes por Gênero (Top 250)</h2>
+                            <div className='resultsList'>
+                                <div className='text-content'>
+                                    <ul>
+                                        {Object.entries(stats.countByGenre).map(([genre, count]) => (
+                                            <li key={genre}>{genre}: {count} filmes</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <div className='chart-content'>
+                                    {stats && (
+                                        <ResponsiveContainer width="100%" height={300}>
+                                            <PieChart>
+                                                <Pie
+                                                    data={countByGenreData}
+                                                    dataKey="count"
+                                                    nameKey="genre"
+                                                    cx="50%"
+                                                    cy="50%"
+                                                    outerRadius={100}
+                                                    fill="#82ca9d"
+                                                    label
+                                                >
+                                                    {countByGenreData.map((entry, index) => (
+                                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                                    ))}
+                                                </Pie>
+                                                <Tooltip />
+                                                <Legend />
+                                            </PieChart>
+                                        </ResponsiveContainer>
+                                    )}
+                                </div>
                             </div>
-                            <div className='chart-content'>
-                                {stats && (
-                                    <ResponsiveContainer width="100%" height={300}>
-                                        <PieChart>
+                        </div>
+                        <div className='resultsList_container'>
+                            <h2>3. Quantidade de Filmes por Ano (Top 250)</h2>
+                            <div className='resultsList'>
+                                <div className='text-content'>
+                                    <ul>
+                                        {stats.sortedCountByYear.map(([year, count]) => (
+                                            <li key={year}>{year}: {count} filmes</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <div className='chart-content'>
+                                    {stats && (
+                                        <ResponsiveContainer width="100%" height={300}>
+                                            <LineChart data={sortedCountByYearData}>
+                                                <CartesianGrid strokeDasharray="3 3" />
+                                                <XAxis dataKey="year" />
+                                                <YAxis />
+                                                <Tooltip />
+                                                <Legend />
+                                                <Line
+                                                    type="monotone"
+                                                    dataKey="count"
+                                                    stroke="#ff7300"
+                                                    name="Filmes por Ano" />
+                                            </LineChart>
+                                        </ResponsiveContainer>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                        <div className='resultsList_container'>
+                            <h2>4. Filmes do Top 250 que estão no Trending Semanal</h2>
+                            <div className='resultsList'>
+                                <div className='text-content'>
+                                    <p>Total: {stats.trendingInTopRated.length}</p>
+                                    <ul>
+                                        {stats.trendingInTopRated.map((movie: Movie) => (
+                                            <li key={movie.id}>{movie.title}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <div className='chart-content'>
+                                    {stats && (
+                                        <ResponsiveContainer width="100%" height={300}>
+                                            <PieChart>
                                             <Pie
-                                                data={countByGenreData}
-                                                dataKey="count"
-                                                nameKey="genre"
+                                                data={trendingPieData}
+                                                dataKey="value"
+                                                nameKey="name"
                                                 cx="50%"
                                                 cy="50%"
                                                 outerRadius={100}
-                                                fill="#82ca9d"
                                                 label
                                             >
-                                                {countByGenreData.map((entry, index) => (
-                                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                                {trendingPieData.map((entry, index) => (
+                                                <Cell key={`cell-${index}`} fill={index === 0 ? '#00C49F' : '#FF8042'} />
                                                 ))}
                                             </Pie>
                                             <Tooltip />
                                             <Legend />
-                                        </PieChart>
-                                    </ResponsiveContainer>
-                                )}
-                            </div>
-                        </div>
-                        <div className='resultsList'>
-                            <div className='text-content'>
-                                <h2>3. Quantidade de Filmes por Ano (Top 250)</h2>
-                                <ul>
-                                    {stats.sortedCountByYear.map(([year, count]) => (
-                                        <li key={year}>{year}: {count} filmes</li>
-                                    ))}
-                                </ul>
-                            </div>
-                            <div className='chart-content'>
-                                {stats && (
-                                    <ResponsiveContainer width="100%" height={300}>
-                                        <LineChart data={sortedCountByYearData}>
-                                            <CartesianGrid strokeDasharray="3 3" />
-                                            <XAxis dataKey="year" />
-                                            <YAxis />
-                                            <Tooltip />
-                                            <Legend />
-                                            <Line 
-                                                type="monotone" 
-                                                dataKey="count"    
-                                                stroke="#ff7300"
-                                                name="Filmes por Ano" />
-                                        </LineChart>
-                                    </ResponsiveContainer>
-                                )}
-                            </div>
-                        </div>
-                        <div className='resultsList'>
-                            <div className='text-content'>
-                                <h2>4. Filmes do Top 250 que estão no Trending Semanal</h2>
-                                <p>Total: {stats.trendingInTopRated.length}</p>
-                                <ul>
-                                    {stats.trendingInTopRated.map((movie: Movie) => (
-                                        <li key={movie.id}>{movie.title}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                            <div className='chart-content'>
-                                {stats && (
-                                    <ResponsiveContainer width="100%" height={300}>
-                                        <PieChart>
-                                        <Pie
-                                            data={trendingPieData}
-                                            dataKey="value"
-                                            nameKey="name"
-                                            cx="50%"
-                                            cy="50%"
-                                            outerRadius={100}
-                                            label
-                                        >
-                                            {trendingPieData.map((entry, index) => (
-                                            <Cell key={`cell-${index}`} fill={index === 0 ? '#00C49F' : '#FF8042'} />
-                                            ))}
-                                        </Pie>
-                                        <Tooltip />
-                                        <Legend />
-                                        </PieChart>
-                                    </ResponsiveContainer>
-                                )}
+                                            </PieChart>
+                                        </ResponsiveContainer>
+                                    )}
+                                </div>
                             </div>
                         </div>
                 </div>
