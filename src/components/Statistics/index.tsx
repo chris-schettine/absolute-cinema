@@ -46,7 +46,11 @@ const defaultStats: LocalStats = {
   trendingInTopRated: []
 };
 
-const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff7300', '#ff4d4d', '#00bfff', '#a83279'];
+const COLORS = [
+  '#8884d8', '#82ca9d', '#ffc658', '#ff7300', '#ff4d4d', '#00bfff', '#a83279',
+  '#8dd1e1', '#a4de6c', '#d0ed57', '#fa8072', '#ffb6c1', '#dda0dd', '#90ee90',
+  '#f0e68c', '#e6e6fa', '#add8e6', '#ffdab9', '#c0c0c0', '#deb887'
+];
 
 export default function MovieStatsAdvanced() {
     const [stats, setStats] = useState<LocalStats>(defaultStats);
@@ -221,10 +225,10 @@ export default function MovieStatsAdvanced() {
                                                 >
                                                     <LabelList
                                                         dataKey="genre"
-                                                        position="insideBottom"
-                                                        angle={270}
-                                                        offset={25}
-                                                        fill="black"
+                                                        position="inside"
+                                                        angle={-90}
+                                                        offset={0}
+                                                        fill="white"
                                                     />
                                                 </Bar>
                                             </BarChart>
@@ -245,25 +249,20 @@ export default function MovieStatsAdvanced() {
                                 </div>
                                 <div className='chart-content'>
                                     {stats && (
-                                        <ResponsiveContainer width="100%" height={300}>
-                                            <PieChart>
-                                                <Pie
-                                                    data={countByGenreData}
-                                                    dataKey="count"
-                                                    nameKey="genre"
-                                                    cx="50%"
-                                                    cy="50%"
-                                                    outerRadius={100}
-                                                    fill="#82ca9d"
-                                                    label
-                                                >
-                                                    {countByGenreData.map((entry, index) => (
-                                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                                                    ))}
-                                                </Pie>
+                                        <ResponsiveContainer width="100%" height={500}>
+                                            <BarChart
+                                                data={countByGenreData.sort((a, b) => b.count - a.count)}
+                                                layout="vertical"
+                                                margin={{ top: 20, right: 30, left: 100, bottom: 20 }}
+                                            >
+                                                <CartesianGrid strokeDasharray="3 3" />
+                                                <XAxis type="number" />
+                                                <YAxis type="category" dataKey="genre" width={100} />
                                                 <Tooltip />
-                                                <Legend />
-                                            </PieChart>
+                                                <Bar dataKey="count" fill="#82ca9d">
+                                                <LabelList dataKey="count" position="right" />
+                                                </Bar>
+                                            </BarChart>
                                         </ResponsiveContainer>
                                     )}
                                 </div>
