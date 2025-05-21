@@ -1,19 +1,19 @@
-h2 {
-  text-align: center;
-  padding: 10px 50px 20px;
-  color: aliceblue;
-}
 h1 {
   text-align: center;
   padding: 10px 50px 20px;
   color: aliceblue;
 }
+
+h2 {
+  text-align: center;
+  padding: 10px 50px 20px;
+  color: aliceblue;
+}
+
 p {
   color: aliceblue;
 }
-li {
-  color: aliceblue;
-}
+
 .resultsList {
   display: flex;
   flex-direction: column-reverse;
@@ -26,6 +26,40 @@ li {
     min-width: 200px;
     padding-right: 1rem;
     text-align: center;
+
+    ul {
+      margin-top: 0.5rem;
+      padding-left: 1.5rem;
+      list-style: none;
+      max-height: 250px; /* Ajuste conforme necessário */
+      overflow-y: auto;
+
+      /* Estilização da barra de rolagem para Webkit browsers */
+      &::-webkit-scrollbar {
+        width: 8px; /* Largura da barra de rolagem vertical */
+        border-radius: 4px; /* Borda arredondada para a barra */
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #333; /* Cor do fundo da trilha da barra de rolagem */
+        border-radius: 4px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #888; /* Cor do "polegar" (o elemento que você arrasta) */
+        border-radius: 4px; /* Borda arredondada para o polegar */
+        border: 2px solid #333; /* Espaçamento ao redor do polegar */
+
+        &:hover {
+          background-color: #555; /* Cor do polegar ao passar o mouse */
+        }
+      }
+      li {
+        font-size: 1.1em; // Aumentar o tamanho da fonte
+        margin-bottom: 5px; // Adicionar espaçamento entre os itens
+        color: aliceblue;
+      }
+    }
   }
 
   .chart-content {
@@ -33,13 +67,8 @@ li {
     max-width: 600px;
     min-width: 300px;
   }
-
-  ul {
-    margin-top: 0.5rem;
-    padding-left: 1.5rem;
-    list-style: none;
-  }
 }
+
 .page_title {
   padding: 24px;
 }

@@ -73,6 +73,15 @@
   .hamburger {
     display: block; // Mostrar em telas menores
     z-index: 1000; /* Dê um z-index alto para o hambúrguer *dentro* do .navbar quando ativo */
+
+    .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: #929BC1; // <- Aqui você define a cor
+    transition: 0.3s;
+  }
   }
 
   .nav-links {
@@ -81,7 +90,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: #a5c;
+    background: #111A41;
     clip-path: circle(100px at 90% -15%);
     transition: clip-path 0.8s ease-out; /* Ajuste a transição para ser mais suave */
     z-index: 990; /* Z-index alto para o menu, mas menor que o hambúrguer se necessário */
