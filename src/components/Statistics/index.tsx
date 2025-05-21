@@ -231,6 +231,9 @@ export default function MovieStatsAdvanced() {
                                                         fill="white"
                                                     />
                                                 </Bar>
+                                                {stats.averageRatingByGenre.map((entry, index) => (
+                                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                                ))}
                                             </BarChart>
                                         </ResponsiveContainer>
                                     )}
@@ -262,6 +265,9 @@ export default function MovieStatsAdvanced() {
                                                 <Bar dataKey="count" fill="#82ca9d">
                                                 <LabelList dataKey="count" position="right" />
                                                 </Bar>
+                                                {countByGenreData.map((entry, index) => (
+                                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                                ))}
                                             </BarChart>
                                         </ResponsiveContainer>
                                     )}
@@ -292,7 +298,11 @@ export default function MovieStatsAdvanced() {
                                                     dataKey="count"
                                                     stroke="#ff7300"
                                                     name="Filmes por Ano" />
+                                                {sortedCountByYearData.map((entry, index) => (
+                                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                                ))}
                                             </LineChart>
+                                            
                                         </ResponsiveContainer>
                                     )}
                                 </div>
