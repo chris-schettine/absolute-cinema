@@ -1,8 +1,8 @@
 import { Movie } from "@/types/movie";
-import StarRating from "../StarRating";
-import './index.scss'
-
 import { Jost } from 'next/font/google';
+import StarRating from "../StarRating";
+
+import './index.scss'
 
 const jost = Jost ({
     subsets: ['latin'],

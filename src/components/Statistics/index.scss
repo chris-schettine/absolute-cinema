@@ -31,32 +31,31 @@ p {
       margin-top: 0.5rem;
       padding-left: 1.5rem;
       list-style: none;
-      max-height: 250px; /* Ajuste conforme necessário */
+      max-height: 250px;
       overflow-y: auto;
 
-      /* Estilização da barra de rolagem para Webkit browsers */
       &::-webkit-scrollbar {
-        width: 8px; /* Largura da barra de rolagem vertical */
-        border-radius: 4px; /* Borda arredondada para a barra */
+        width: 8px;
+        border-radius: 4px;
       }
 
       &::-webkit-scrollbar-track {
-        background: #333; /* Cor do fundo da trilha da barra de rolagem */
+        background: #333;
         border-radius: 4px;
       }
 
       &::-webkit-scrollbar-thumb {
-        background-color: #888; /* Cor do "polegar" (o elemento que você arrasta) */
-        border-radius: 4px; /* Borda arredondada para o polegar */
-        border: 2px solid #333; /* Espaçamento ao redor do polegar */
+        background-color: #888;
+        border-radius: 4px;
+        border: 2px solid #333;
 
         &:hover {
-          background-color: #555; /* Cor do polegar ao passar o mouse */
+          background-color: #555;
         }
       }
       li {
-        font-size: 1.1em; // Aumentar o tamanho da fonte
-        margin-bottom: 5px; // Adicionar espaçamento entre os itens
+        font-size: 1.1em;
+        margin-bottom: 5px;
         color: aliceblue;
       }
     }

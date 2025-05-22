@@ -1,15 +1,15 @@
 export type Stats = {
   averageRatingByGenre: {
-    [genre: string]: number; // ex: { "Ação": 7.5 }
+    [genre: string]: number;
   };
   countByGenre: {
-    [genre: string]: number; // ex: { "Drama": 25 }
+    [genre: string]: number;
   };
   sortedCountByYear: {
-    [year: string]: number; // ex: { "2021": 18 }
+    [year: string]: number;
   };
   trendingInTopRated: {
     id: number;
     title: string;
-  }[]; // filmes que estão tanto nos top-rated quanto nos trending
+  }[];
 };

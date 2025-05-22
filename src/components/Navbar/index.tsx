@@ -1,10 +1,10 @@
 'use client'
 
 import Link from 'next/link';
-
-import './index.scss';
 import { Jost } from 'next/font/google';
 import { useState } from 'react';
+
+import './index.scss';
 
 const jost = Jost ({
     subsets: ['latin'],
@@ -39,7 +39,6 @@ export const Header: React.FC = () => {
                     </nav>
                 </div>
 
-                {/* Botão de hambúrguer de volta dentro do .navbar */}
                 <button className="hamburger" onClick={toggleMenu}>
                     <span className="bar"></span>
                     <span className="bar"></span>

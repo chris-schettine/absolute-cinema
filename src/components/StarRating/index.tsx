@@ -1,6 +1,7 @@
 import { FaStar } from "react-icons/fa";
 import { FaRegStar } from "react-icons/fa";
 import { FaStarHalfAlt } from "react-icons/fa";
+
 import './index.scss'
 
 export interface Props {

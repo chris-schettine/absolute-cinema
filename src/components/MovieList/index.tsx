@@ -1,12 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import './index.scss';
-import axios from 'axios';
-import MovieCard from '../MovieCard';
-import Loading from '../Loading'; // <- Certifique-se que o caminho está correto
 import { Movie } from '@/types/movie';
 import { Jost } from 'next/font/google';
+import axios from 'axios';
+import MovieCard from '../MovieCard';
+import Loading from '../Loading';
+
+import './index.scss';
 
 const jost = Jost ({
     subsets: ['latin'],
@@ -58,7 +59,7 @@ export default function MovieList() {
     }
 
     setMovies(allMovies.slice(0, 250));
-    setIsLoading(false); // <- Marca como carregado
+    setIsLoading(false);
   };
 
   if (isLoading) {

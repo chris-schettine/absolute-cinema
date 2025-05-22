@@ -1,28 +1,23 @@
-/* ... seu CSS existente ... */
-
 .header{
-    background-color: #0f1722;
-    padding: 12px 3%;
-    padding-inline: 16px;
-    font-family: var(--font-jost);
-    /* O header, por padrão, rolará com o scroll se não tiver position: fixed/absolute */
-    /* Garanta que não há nenhum position: fixed ou absolute aplicado ao .header ou seus ancestrais que você não queira que seja fixo */
+  background-color: #0f1722;
+  padding: 12px 3%;
+  padding-inline: 16px;
+  font-family: var(--font-jost);
 }
 
 .navbar {
-    max-width: 1280px;
-    height: 70px;
-    margin-inline: auto;
+  max-width: 1280px;
+  height: 70px;
+  margin-inline: auto;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* O .navbar também rolará com o scroll */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   .nav-links {
-    display: flex;
-    gap: 32px;
-    list-style: none;
+  display: flex;
+  gap: 32px;
+  list-style: none;
   }
 
   a {
@@ -48,21 +43,18 @@
   max-width: 250px;
 }
 
-/* Estilos para o botão de hambúrguer */
 .hamburger {
-  display: none; // Esconder por padrão em telas maiores
+  display: none;
   background: none;
   border: none;
   cursor: pointer;
   padding: 10px;
-  /* Remova position: fixed, top, right e z-index daqui */
-  /* Seu z-index será ajustado dentro da media query se necessário */
 
   .bar {
     display: block;
     width: 25px;
     height: 3px;
-    background-color: #60a5fa; /* Mantenha a cor que você definiu */
+    background-color: #60a5fa;
     margin: 5px auto;
     transition: all 0.3s ease-in-out;
   }
@@ -71,29 +63,29 @@
 
 @media (max-width: 750px) {
   .hamburger {
-    display: block; // Mostrar em telas menores
-    z-index: 1000; /* Dê um z-index alto para o hambúrguer *dentro* do .navbar quando ativo */
+    display: block;
+    z-index: 1000;
 
     .bar {
     display: block;
     width: 25px;
     height: 3px;
     margin: 5px auto;
-    background-color: #929BC1; // <- Aqui você define a cor
+    background-color: #929BC1;
     transition: 0.3s;
-  }
+    }
   }
 
   .nav-links {
-    position: fixed; /* Mantenha o menu fixo para sobrepor a página */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     background: #111A41;
     clip-path: circle(100px at 90% -15%);
-    transition: clip-path 0.8s ease-out; /* Ajuste a transição para ser mais suave */
-    z-index: 990; /* Z-index alto para o menu, mas menor que o hambúrguer se necessário */
+    transition: clip-path 0.8s ease-out;
+    z-index: 990;
 
     flex-direction: column;
     justify-content: space-around;
@@ -106,19 +98,16 @@
   .nav-links a {
     font-size: 24px;
     opacity: 0;
-    transition: opacity 0.5s ease-in-out; /* Transição para a opacidade */
+    transition: opacity 0.5s ease-in-out;
   }
 
-  /* Ajustes para os atrasos dos links */
-  .navbar.active .nav-links a:nth-child(1) { /* Ajuste o seletor conforme necessário */
+  .navbar.active .nav-links a:nth-child(1) {
     transition-delay: 0.2s;
   }
   .navbar.active .nav-links a:nth-child(2) {
     transition-delay: 0.4s;
   }
 
-
-  /* Estilos ativos */
   .navbar.active .nav-links {
     clip-path: circle(1500px at 90% -15%);
     pointer-events: all;
@@ -128,7 +117,6 @@
     opacity: 1;
   }
 
-  /* Animação do botão de hambúrguer */
   .navbar.active .hamburger .bar:nth-child(1) {
     transform: translateY(8px) rotate(45deg);
   }

@@ -1,4 +1,5 @@
 import { FaFilm } from 'react-icons/fa';
+
 import './index.scss';
 
 export default function Loading() {
