@@ -6,6 +6,12 @@ import axios from 'axios';
 import MovieCard from '../MovieCard';
 import Loading from '../Loading'; // <- Certifique-se que o caminho está correto
 import { Movie } from '@/types/movie';
+import { Jost } from 'next/font/google';
+
+const jost = Jost ({
+    subsets: ['latin'],
+    weight: ['300', '100'],
+})
 
 export default function MovieList() {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -56,8 +62,8 @@ export default function MovieList() {
   }
 
   return (
-    <div>
-      <h1 className='page_title'>Estatísticas Para Nerds</h1>
+    <div className={jost.className}>
+      <h1 className='page_title'>Os 250 Filmes Mais Bem Avaliados do TMDb</h1>
         <ul className="movie-list">
           {movies.map((movie) => (
             <MovieCard key={movie.id} movie={movie} />
