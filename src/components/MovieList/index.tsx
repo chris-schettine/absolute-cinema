@@ -56,10 +56,13 @@ export default function MovieList() {
   }
 
   return (
-    <ul className="movie-list">
-      {movies.map((movie) => (
-        <MovieCard key={movie.id} movie={movie} />
-      ))}
-    </ul>
+    <div>
+      <h1 className='page_title'>Estatísticas Para Nerds</h1>
+        <ul className="movie-list">
+          {movies.map((movie) => (
+            <MovieCard key={movie.id} movie={movie} />
+          ))}
+        </ul>
+    </div>
   );
 }
