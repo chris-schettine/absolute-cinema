@@ -52,6 +52,8 @@ const COLORS = [
   '#f0e68c', '#e6e6fa', '#add8e6', '#ffdab9', '#c0c0c0', '#deb887'
 ];
 
+
+
 export default function MovieStatsAdvanced() {
     const [stats, setStats] = useState<LocalStats>(defaultStats);
 
@@ -61,7 +63,12 @@ export default function MovieStatsAdvanced() {
 
     const fetchAndProcessMovies = async () => {
         try {
-            const API_KEY = '0ed637ff0d43f711ced0dfaac63b50ec';
+       
+            const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+
+            if (!API_KEY) {
+                throw new Error("A variável de ambiente NEXT_PUBLIC_API_KEY não está definida.");
+            }
 
             // Buscar lista de gêneros
             const genreResponse = await axios.get(`https://api.themoviedb.org/3/genre/movie/list`, {

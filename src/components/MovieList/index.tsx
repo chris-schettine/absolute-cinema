@@ -22,8 +22,12 @@ export default function MovieList() {
   }, []);
 
   const getMoviesUpTo250 = async () => {
-    const API_KEY = '0ed637ff0d43f711ced0dfaac63b50ec';
+    const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
     const BASE_URL = 'https://api.themoviedb.org/3/movie/top_rated';
+
+    if (!API_KEY) {
+      throw new Error("A variável de ambiente NEXT_PUBLIC_API_KEY não está definida.");
+    }
 
     let allMovies: Movie[] = [];
     let page = 1;
