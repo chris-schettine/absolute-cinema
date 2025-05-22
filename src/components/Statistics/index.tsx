@@ -262,7 +262,10 @@ export default function MovieStatsAdvanced() {
                                                 <XAxis type="number" />
                                                 <YAxis type="category" dataKey="genre" width={100} />
                                                 <Tooltip />
-                                                <Bar dataKey="count" fill="#82ca9d">
+                                                <Bar 
+                                                    dataKey="count" 
+                                                    fill="#82ca9d"
+                                                    name="Quantidade de Filmes">
                                                 <LabelList dataKey="count" position="right" />
                                                 </Bar>
                                                 {countByGenreData.map((entry, index) => (
